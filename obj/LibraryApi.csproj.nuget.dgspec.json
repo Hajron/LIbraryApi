@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ronny\\utvikling\\omda\\LibraryApi\\LibraryApi.csproj": {}
+    "C:\\Users\\ronny\\Utvikling\\Omda\\LibraryApi\\LibraryApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ronny\\utvikling\\omda\\LibraryApi\\LibraryApi.csproj": {
+    "C:\\Users\\ronny\\Utvikling\\Omda\\LibraryApi\\LibraryApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ronny\\utvikling\\omda\\LibraryApi\\LibraryApi.csproj",
+        "projectUniqueName": "C:\\Users\\ronny\\Utvikling\\Omda\\LibraryApi\\LibraryApi.csproj",
         "projectName": "LibraryApi",
-        "projectPath": "C:\\Users\\ronny\\utvikling\\omda\\LibraryApi\\LibraryApi.csproj",
+        "projectPath": "C:\\Users\\ronny\\Utvikling\\Omda\\LibraryApi\\LibraryApi.csproj",
         "packagesPath": "C:\\Users\\ronny\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ronny\\utvikling\\omda\\LibraryApi\\obj\\",
+        "outputPath": "C:\\Users\\ronny\\Utvikling\\Omda\\LibraryApi\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ronny\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -47,6 +47,10 @@
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[9.0.6, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[9.0.4, )"
             }
           },
           "imports": [
