@@ -15,9 +15,9 @@ public class ExceptionHandlingMiddleware
             await _next(context);
         }
         catch (Exception ex)
-        {
+        {   
+            context.Response.StatusCode = 500;
             await context.Response.WriteAsync("En feil oppstod på serveren. Prøv igjen senrere." + ex.Message);
-
         }
     }
   
