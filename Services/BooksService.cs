@@ -3,7 +3,7 @@ using LibraryApi.Models;
 
 namespace LibraryApi.Services;
 
-public class BooksService : IbooksService
+public class BooksService : IBooksService
 {
     private static readonly List<Book> books = new()
     {
@@ -25,7 +25,7 @@ public class BooksService : IbooksService
         var existingBook = GetBookById(id);
         if (existingBook == null)
 
-            existingBook.Title = book.Title;
+        existingBook.Title = book.Title;
         existingBook.Author = book.Author;
         existingBook.Year = book.Year;
 

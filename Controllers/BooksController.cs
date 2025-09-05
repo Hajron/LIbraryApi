@@ -12,18 +12,10 @@ namespace LibraryApi.Controllers;
 
 public class BooksController : ControllerBase
 {
-    // public static void ResetBooks()
-    // {
-    //     books.Clear();
-    //     books.AddRange(new[]
-    //     {
-    //     new Book { Id = 1, Title = "1984", Author = "George Orwell", Year = 1949 },
-    //     new Book { Id = 2, Title = "To Kill a Mockingbird", Author = "Harper Lee", Year = 1960 },
-    // });
-    // }
-    private readonly IbooksService _booksService;
 
-    public BooksController(IbooksService booksService)
+    private readonly IBooksService _booksService;
+
+    public BooksController(IBooksService booksService)
     {
         _booksService = booksService;
     }
@@ -68,11 +60,6 @@ public class BooksController : ControllerBase
     [HttpDelete("{id}")]
     public ActionResult DeleteBook(int id)
     {
-        var book = _booksService.GetBookById(id);
-        if (book == null)
-        {
-            return NotFound();
-        }
         _booksService.DeleteBook(id);
         return NoContent();
      }

@@ -1,6 +1,6 @@
 
 using LibraryApi.Models;
-public interface IbooksService
+public interface IBooksService
 {
     IEnumerable<Book> GetBooks();
     Book? GetBookById(int ID);

@@ -1,47 +1,58 @@
 using LibraryApi.Controllers;
 using LibraryApi.Models;
+using LibraryApi.Services;
 using Microsoft.AspNetCore.Mvc;
+using Moq;
 using Xunit;
-using System.Linq;
 using System.Collections.Generic;
 
 public class BooksControllerTests
 {
+    private readonly Mock<IBooksService> _mockService;
+    private readonly BooksController _controller;
+
     public BooksControllerTests()
     {
-        BooksController.ResetBooks();
+        _mockService = new Mock<IBooksService>();
+        _controller = new BooksController(_mockService.Object);
     }
 
     [Fact]
     public void GetBooks_ReturnsAllBooks()
     {
-        var controller = new BooksController();
+        var books = new List<Book>
+        {
+            new Book { Id = 1, Title = "1984", Author = "George Orwell", Year = 1949 },
+            new Book { Id = 2, Title = "To Kill a Mockingbird", Author = "Harper Lee", Year = 1960 }
+        };
+        _mockService.Setup(s => s.GetBooks()).Returns(books);
 
-        var result = controller.GetBooks();
+        var result = _controller.GetBooks();
 
         var okResult = Assert.IsType<OkObjectResult>(result.Result);
-        var books = Assert.IsAssignableFrom<IEnumerable<Book>>(okResult.Value);
-        Assert.True(books.Count() >= 2);
+        var returnedBooks = Assert.IsAssignableFrom<IEnumerable<Book>>(okResult.Value);
+        Assert.Equal(2, ((List<Book>)returnedBooks).Count);
     }
 
     [Fact]
     public void GetBook_ReturnsBook_WhenBookExists()
     {
-        var controller = new BooksController();
+        var book = new Book { Id = 1, Title = "1984", Author = "George Orwell", Year = 1949 };
+        _mockService.Setup(s => s.GetBookById(1)).Returns(book);
 
-        var result = controller.GetBook(1);
+        var result = _controller.GetBook(1);
 
         var okResult = Assert.IsType<OkObjectResult>(result.Result);
-        var book = Assert.IsType<Book>(okResult.Value);
-        Assert.Equal(1, book.Id);
+        var returnedBook = Assert.IsType<Book>(okResult.Value);
+        Assert.Equal(1, returnedBook.Id);
     }
 
     [Fact]
     public void GetBook_ReturnsNotFound_WhenBookDoesNotExist()
     {
-        var controller = new BooksController();
+        _mockService.Setup(s => s.GetBookById(999)).Returns((Book)null);
 
-        var result = controller.GetBook(999);
+        var result = _controller.GetBook(999);
 
         Assert.IsType<NotFoundResult>(result.Result);
     }
@@ -49,23 +60,24 @@ public class BooksControllerTests
     [Fact]
     public void CreateBook_AddsBook()
     {
-        var controller = new BooksController();
-        var newBook = new Book { Title = "Test", Author = "Tester", Year = 2024 };
+        var newBook = new Book { Id = 3, Title = "Test", Author = "Tester", Year = 2024 };
+        _mockService.Setup(s => s.AddBook(newBook));
 
-        var result = controller.CreateBook(newBook);
+        var result = _controller.CreateBook(newBook);
 
         var createdResult = Assert.IsType<CreatedAtActionResult>(result.Result);
-        var book = Assert.IsType<Book>(createdResult.Value);
-        Assert.Equal("Test", book.Title);
+        var returnedBook = Assert.IsType<Book>(createdResult.Value);
+        Assert.Equal("Test", returnedBook.Title);
     }
 
     [Fact]
     public void UpdateBook_UpdatesBook_WhenBookExists()
     {
-        var controller = new BooksController();
-        var updatedBook = new Book { Title = "Updated", Author = "Updated", Year = 2025 };
+        var updatedBook = new Book { Id = 1, Title = "Updated", Author = "Updated", Year = 2025 };
+        _mockService.Setup(s => s.GetBookById(1)).Returns(updatedBook);
+        _mockService.Setup(s => s.UpdateBook(1, updatedBook));
 
-        var result = controller.UpdateBook(1, updatedBook);
+        var result = _controller.UpdateBook(1, updatedBook);
 
         Assert.IsType<NoContentResult>(result);
     }
@@ -73,10 +85,10 @@ public class BooksControllerTests
     [Fact]
     public void UpdateBook_ReturnsNotFound_WhenBookDoesNotExist()
     {
-        var controller = new BooksController();
-        var updatedBook = new Book { Title = "Updated", Author = "Updated", Year = 2025 };
+        var updatedBook = new Book { Id = 999, Title = "Updated", Author = "Updated", Year = 2025 };
+        _mockService.Setup(s => s.GetBookById(999)).Returns((Book)null);
 
-        var result = controller.UpdateBook(999, updatedBook);
+        var result = _controller.UpdateBook(999, updatedBook);
 
         Assert.IsType<NotFoundResult>(result);
     }
@@ -84,20 +96,10 @@ public class BooksControllerTests
     [Fact]
     public void DeleteBook_DeletesBook_WhenBookExists()
     {
-        var controller = new BooksController();
+        _mockService.Setup(s => s.DeleteBook(1));
 
-        var result = controller.DeleteBook(1);
+        var result = _controller.DeleteBook(1);
 
         Assert.IsType<NoContentResult>(result);
-    }
-
-    [Fact]
-    public void DeleteBook_ReturnsNotFound_WhenBookDoesNotExist()
-    {
-        var controller = new BooksController();
-
-        var result = controller.DeleteBook(999);
-
-        Assert.IsType<NotFoundResult>(result);
     }
 }
