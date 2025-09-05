@@ -117,3 +117,13 @@ C:\Users\ronny\Utvikling\Omda\LibraryApi\bin\Debug\net9.0\zh-Hant\Microsoft.Test
 C:\Users\ronny\Utvikling\Omda\LibraryApi\bin\Debug\net9.0\zh-Hant\Microsoft.VisualStudio.TestPlatform.Common.resources.dll
 C:\Users\ronny\Utvikling\Omda\LibraryApi\bin\Debug\net9.0\Castle.Core.dll
 C:\Users\ronny\Utvikling\Omda\LibraryApi\bin\Debug\net9.0\Moq.dll
+C:\Users\ronny\Utvikling\Omda\LibraryApi\bin\Debug\net9.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\ronny\Utvikling\Omda\LibraryApi\bin\Debug\net9.0\Serilog.dll
+C:\Users\ronny\Utvikling\Omda\LibraryApi\bin\Debug\net9.0\Serilog.AspNetCore.dll
+C:\Users\ronny\Utvikling\Omda\LibraryApi\bin\Debug\net9.0\Serilog.Extensions.Hosting.dll
+C:\Users\ronny\Utvikling\Omda\LibraryApi\bin\Debug\net9.0\Serilog.Extensions.Logging.dll
+C:\Users\ronny\Utvikling\Omda\LibraryApi\bin\Debug\net9.0\Serilog.Formatting.Compact.dll
+C:\Users\ronny\Utvikling\Omda\LibraryApi\bin\Debug\net9.0\Serilog.Settings.Configuration.dll
+C:\Users\ronny\Utvikling\Omda\LibraryApi\bin\Debug\net9.0\Serilog.Sinks.Console.dll
+C:\Users\ronny\Utvikling\Omda\LibraryApi\bin\Debug\net9.0\Serilog.Sinks.Debug.dll
+C:\Users\ronny\Utvikling\Omda\LibraryApi\bin\Debug\net9.0\Serilog.Sinks.File.dll
