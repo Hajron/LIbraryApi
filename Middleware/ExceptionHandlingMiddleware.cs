@@ -1,4 +1,6 @@
 
+using Serilog;
+
 public class ExceptionHandlingMiddleware
 {
     private readonly RequestDelegate _next;
@@ -16,6 +18,7 @@ public class ExceptionHandlingMiddleware
         }
         catch (Exception ex)
         {   
+            Log.Error(ex, "An unhandled exception occurred.");
             context.Response.StatusCode = 500;
             await context.Response.WriteAsync("En feil oppstod på serveren. Prøv igjen senrere." + ex.Message);
         }

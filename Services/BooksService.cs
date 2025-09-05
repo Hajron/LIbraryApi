@@ -1,5 +1,6 @@
 
 using LibraryApi.Models;
+using Serilog;
 
 namespace LibraryApi.Services;
 
@@ -18,6 +19,7 @@ public class BooksService : IBooksService
     {
         book.Id = books.Max(b => b.Id) + 1;
         books.Add(book);
+        Log.Information("Book added: {@Book}", book);
     }
 
     public void UpdateBook(int id, Book book)
