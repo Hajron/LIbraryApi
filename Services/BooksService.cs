@@ -8,8 +8,8 @@ public class BooksService : IBooksService
 {
     private static readonly List<Book> books = new()
     {
-        new Book { Id = 1, Title = "1984", Author = "George Orwell", Year = 1949 },
-        new Book { Id = 2, Title = "To Kill a Mockingbird", Author = "Harper Lee", Year = 1960 },
+        // new Book { Id = 1, Title = "1984", Author = "George Orwell", Year = 1949 },
+        // new Book { Id = 2, Title = "To Kill a Mockingbird", Author = "Harper Lee", Year = 1960 },
     };
 
     public IEnumerable<Book> GetBooks() => books;

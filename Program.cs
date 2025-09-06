@@ -1,5 +1,7 @@
 
 using LibraryApi.Services;
+using Microsoft.EntityFrameworkCore;
+using LibraryApi.Data;
 using Serilog;
 
 
@@ -9,8 +11,10 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 builder.Services.AddScoped<IBooksService, BooksService>();
- 
- Log.Logger = new LoggerConfiguration()
+builder.Services.AddDbContext<LibraryDbContext>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+Log.Logger = new LoggerConfiguration()
     .ReadFrom.Configuration(builder.Configuration)
     .WriteTo.Console()
     .WriteTo.File("logs/log-.txt", rollingInterval: RollingInterval.Day)
