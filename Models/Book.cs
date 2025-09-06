@@ -15,7 +15,7 @@ public class Book
     public int Year { get; set; }
 
     [ForeignKey("Author")]
-    public string AuthorId { get; set; } = "";
+    public int AuthorId { get; set; }
     public Author? Author { get; set; }
     public ICollection<Loan> Loans { get; set; }
     
